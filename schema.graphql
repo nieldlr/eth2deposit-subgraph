@@ -1,6 +1,20 @@
-type ExampleEntity @entity {
+type Aggregation @entity {
   id: ID!
-  count: BigInt!
+  totalDeposits: BigInt
+  totalDepositors: BigInt
+  totalAmountDeposited: BigInt
+}
+
+type Depositor @entity {
+  id: ID!
+  depositCount: BigInt
+  deposits: [Deposit!] @derivedFrom(field: "depositor")
+}
+
+type Deposit @entity {
+  id: ID!
+  depositor: Depositor
   pubkey: Bytes! # bytes
   withdrawal_credentials: Bytes! # bytes
+  amount: BigInt! # bytes
 }
