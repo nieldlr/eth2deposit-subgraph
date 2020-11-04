@@ -1,18 +1,26 @@
 type Aggregation @entity {
   id: ID!
+  "Total deposits"
   totalDeposits: BigInt
+  "Total unique depositors"
   totalDepositors: BigInt
+  "Total eth amount deposited"
   totalAmountDeposited: BigInt
 }
 
 type Depositor @entity {
+  "Eth Address"
   id: ID!
+  "How deposits this depositor has made"
   depositCount: BigInt
+  "List of deposits for this depositor"
   deposits: [Deposit!] @derivedFrom(field: "depositor")
 }
 
 type Deposit @entity {
+  "Transaction hash"
   id: ID!
+  "Links up to depositor"
   depositor: Depositor
   pubkey: Bytes! # bytes
   withdrawal_credentials: Bytes! # bytes
