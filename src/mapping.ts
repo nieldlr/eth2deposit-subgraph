@@ -33,6 +33,7 @@ export function handleDepositEvent(event: DepositEvent): void {
   deposit.withdrawal_credentials = event.params.withdrawal_credentials
   deposit.amount = BigInt.fromUnsignedBytes(event.params.amount)
   deposit.depositor = event.transaction.from.toHex()
+  deposit.timestamp = event.block.timestamp
   aggregation.totalAmountDeposited = aggregation.totalAmountDeposited.plus(deposit.amount)
 
   // Entities can be written to the store with `.save()`

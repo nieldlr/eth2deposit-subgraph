@@ -17,4 +17,5 @@ type Deposit @entity {
   pubkey: Bytes! # bytes
   withdrawal_credentials: Bytes! # bytes
   amount: BigInt! # bytes
+  timestamp: BigInt!
 }
