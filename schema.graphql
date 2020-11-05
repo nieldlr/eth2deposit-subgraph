@@ -11,6 +11,8 @@ type Aggregation @entity {
 type Depositor @entity {
   "Eth Address"
   id: ID!
+  "Total Eth deposited by this depositor"
+  totalAmountDeposited: BigInt
   "How deposits this depositor has made"
   depositCount: BigInt
   "List of deposits for this depositor"

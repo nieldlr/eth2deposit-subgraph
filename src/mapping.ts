@@ -20,6 +20,7 @@ export function handleDepositEvent(event: DepositEvent): void {
   if(depositor == null) {
     depositor = new Depositor(event.transaction.from.toHex())
     depositor.depositCount = BigInt.fromI32(0)
+    depositor.totalAmountDeposited = BigInt.fromI32(0)
     aggregation.totalDepositors = aggregation.totalDepositors.plus(BigInt.fromI32(1))
   }
 
@@ -34,6 +35,8 @@ export function handleDepositEvent(event: DepositEvent): void {
   deposit.amount = BigInt.fromUnsignedBytes(event.params.amount)
   deposit.depositor = event.transaction.from.toHex()
   deposit.timestamp = event.block.timestamp
+
+  depositor.totalAmountDeposited = depositor.totalAmountDeposited.plus(deposit.amount)
   aggregation.totalAmountDeposited = aggregation.totalAmountDeposited.plus(deposit.amount)
 
   // Entities can be written to the store with `.save()`
